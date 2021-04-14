@@ -6,8 +6,14 @@ const databaseURL = env('DATABASE_URL');
 const dbOptions = dbURL => {
   const options = {
     use_env_variable: 'DATABASE_URL',
+    ssl: true,
+    dialect: 'postgres',
     dialectOptions: {
-      ssl: env('DB_SSL', false)
+	//ssl: env('DB_SSL', true)
+	ssl: {
+            require: true,
+            rejectUnauthorized: false,
+        }
     }
   };
   return dbURL ? options : {};
