@@ -7,7 +7,7 @@ const dbOptions = dbURL => {
   const options = {
     use_env_variable: 'DATABASE_URL',
     dialectOptions: {
-      ssl: env('DB_SSL', true)
+      ssl: env('DB_SSL', false)
     }
   };
   return dbURL ? options : {};
