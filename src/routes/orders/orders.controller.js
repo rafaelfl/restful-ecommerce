@@ -40,6 +40,42 @@ class OrdersController extends BaseController {
   }
 
   /**
+   * Fetch a list of cancelled orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  getCancelledOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ plain: true, where: { userId, status: "cancelled" } });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
+  /**
+   * Fetch a list of completed orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  getCompletedOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ plain: true, where: { userId, status: "completed" } });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
+  /**
    * Fetch a specific order by id
    *
    * @param {object} req - Express Request object

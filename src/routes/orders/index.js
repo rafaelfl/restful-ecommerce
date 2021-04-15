@@ -11,6 +11,12 @@ router.get('/orders', AuthGuard.verifyToken, Controller.getOrders());
 /* List of pending orders */
 router.get('/orders/pending', AuthGuard.verifyToken, Controller.getPendingOrders());
 
+/* List of cancelled orders */
+router.get('/orders/cancelled', AuthGuard.verifyToken, Controller.getCancelledOrders());
+
+/* List of completed orders */
+router.get('/orders/completed', AuthGuard.verifyToken, Controller.getCompletedOrders());
+
 /* Get a specific order */
 router.get(
   '/orders/:id',
