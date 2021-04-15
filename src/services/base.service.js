@@ -50,6 +50,21 @@ export default class BaseService {
   }
 
   /**
+   * Search for a specific resource using the WHERE clause
+   *
+   * @param {object} where - Where clause
+   * @param {object} options - Query options
+   * @returns {object} The resource (if found)
+   * @memberof BaseService
+   */
+   async findAll(options = {}) {
+    const { plain, ...option } = options;
+    const rows = await this.model.findAll(option);
+
+    return plain === true ? rows.map(row => row.get({ plain })) : rows;
+  }
+
+  /**
    * Create a new resource
    *
    * @param {object} data - The resource data
