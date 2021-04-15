@@ -102,6 +102,26 @@ class OrdersController extends BaseController {
   }
 
   /**
+   * Pay an order
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  payOrder() {
+    return this.asyncWrapper(async (req, res) => {
+      const {
+        params: { id: orderId },
+        user: { id: userId }
+      } = req;
+      const order = await this.service.payOrder(userId, orderId);
+
+      this.sendResponse(res, order);
+    });
+  }
+
+  /**
    * Update an order
    *
    * @param {object} req - Express Request object

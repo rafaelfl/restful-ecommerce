@@ -29,6 +29,13 @@ router.post(
   Controller.cancelOrder()
 );
 
+/* Pay an order */
+router.post(
+  '/orders/:id/pay',
+  AuthGuard.verifyToken,
+  Controller.payOrder()
+);
+
 /* Update a specific order */
 router.patch(
   '/orders/:id',

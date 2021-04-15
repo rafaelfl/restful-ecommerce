@@ -33,6 +33,20 @@ class OrderService extends BaseService {
     await order.save();
     return order;
   }
+
+  async payOrder(userId, orderId) {
+    const order = await super.find({ id: orderId, userId });
+
+    ExceptionHandler.throwErrorIfNull(order);
+
+    if (order.status !== 'pending') {
+      ExceptionHandler.throwOperationOutOfBound();
+    }
+
+    order.status = 'completed';
+    await order.save();
+    return order;
+  }
 }
 
 const { Order } = models;
