@@ -20,6 +20,7 @@ router.get(
 router.post(
   '/products',
   AuthGuard.verifyToken,
+  AuthGuard.adminOnly,
   Validator.validate('createProduct'),
   Controller.createProduct()
 );
