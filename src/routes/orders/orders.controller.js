@@ -20,7 +20,25 @@ class OrdersController extends BaseController {
       this.sendResponse(res, orders);
     });
   }
-  
+
+  /**
+   * Fetch a list of pending orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  getPendingOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ userId, status: "pending" }, { plain: true });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
   /**
    * Fetch a specific order by id
    *

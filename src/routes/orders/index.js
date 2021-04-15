@@ -8,6 +8,9 @@ const router = Router();
 /* List of orders */
 router.get('/orders', AuthGuard.verifyToken, Controller.getOrders());
 
+/* List of pending orders */
+router.get('/orders/pending', AuthGuard.verifyToken, Controller.getPendingOrders());
+
 /* Get a specific order */
 router.get(
   '/orders/:id',
