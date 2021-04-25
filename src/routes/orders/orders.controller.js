@@ -76,6 +76,78 @@ class OrdersController extends BaseController {
   }
 
   /**
+   * Fetch a list of orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+   getAllOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      // const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ plain: true });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
+  /**
+   * Fetch a list of all pending orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  getAllPendingOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      // const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ plain: true, where: { status: "pending" } });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
+  /**
+   * Fetch a list of cancelled orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  getAllCancelledOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      // const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ plain: true, where: { status: "cancelled" } });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
+  /**
+   * Fetch a list of completed orders
+   *
+   * @param {object} req - Express Request object
+   * @param {object} res - Express Response object
+   * @param {Function} res - Express next function
+   * @memberof OrdersController
+   */
+  getAllCompletedOrders() {
+    return this.asyncWrapper(async (req, res) => {
+      // const { id: userId } = req.user;
+      // const orders = await this.service.find({ userId }, { plain: true });
+      const orders = await this.service.findAll({ plain: true, where: { status: "completed" } });
+
+      this.sendResponse(res, orders);
+    });
+  }
+
+  /**
    * Fetch a specific order by id
    *
    * @param {object} req - Express Request object

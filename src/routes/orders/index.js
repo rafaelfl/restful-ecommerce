@@ -17,6 +17,18 @@ router.get('/orders/cancelled', AuthGuard.verifyToken, Controller.getCancelledOr
 /* List of completed orders */
 router.get('/orders/completed', AuthGuard.verifyToken, Controller.getCompletedOrders());
 
+/* List of all orders */
+router.get('/orders/all', AuthGuard.verifyToken, AuthGuard.adminOnly, Controller.getAllOrders());
+
+/* List of all pending orders */
+router.get('/orders/all/pending', AuthGuard.verifyToken, AuthGuard.adminOnly, Controller.getAllPendingOrders());
+
+/* List of cancelled orders */
+router.get('/orders/all/cancelled', AuthGuard.verifyToken, AuthGuard.adminOnly, Controller.getAllCancelledOrders());
+
+/* List of completed orders */
+router.get('/orders/all/completed', AuthGuard.verifyToken, AuthGuard.adminOnly, Controller.getAllCompletedOrders());
+
 /* Get a specific order */
 router.get(
   '/orders/:id',
